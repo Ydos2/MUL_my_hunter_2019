@@ -9,7 +9,17 @@ NAMELIB		= libmy.a
 DIRLIB		=./lib/
 DIRLIBMY		=./lib/my/
 DIRTEST		=./tests/*.c
-COMPIL		= gcc *.c -L $(DIRLIB) -lmy -l csfml-graphics -l csfml-system -l csfml-audio -o $(EXEC)
+SRC		=	duck_anim_1.c	\
+			duck_draw_1.c	\
+			duck_draw_2.c	\
+			duck_event.c	\
+			duck_main.c		\
+			duck_script.c	\
+			duck_sound.c	\
+			duck_tools_1.c	\
+			duck_ui.c	\
+COMPIL		= gcc $(SRC) -L $(DIRLIB) -lmy -l csfml-graphics -l csfml-system -l csfml-audio -o $(EXEC)
+COMPIL_DEBUG		= gcc *.c -L $(DIRLIB) -lmy -l csfml-graphics -l csfml-system -l csfml-audio -o $(EXEC) -g3
 COMPIL_TEST		= gcc *.c -g3 -L $(DIRLIB) $(DIRTEST) --coverage -lcriterion -lmy -o $(EXEC_TEST)
 EXEC		= my_hunter
 EXEC_TEST		= tests_my_hunter
@@ -29,6 +39,9 @@ compilation:
 compilation_test:
 		$(COMPIL_TEST)
 
+compilation_debug:
+		$(COMPIL_DEBUG)
+
 run_test:
 		$(RUN_TESTS)
 		$(COVERAGE)
@@ -46,3 +59,5 @@ fclean: clean test_clean
 re: fclean all
 
 tests_run: make compilation compilation_test run_test clean test_clean
+
+debug: make compilation compilation_debug clean clean

@@ -56,6 +56,7 @@ typedef struct ui {
     int round;
     float seconds;
     int flash;
+    sfTime time;
     struct duck *duck_list;
 } ui_t;
 
@@ -67,12 +68,13 @@ void draw_bullet_2(sfRenderWindow* window, ui_t *ui_struct, sfSprite* sprite_bul
 void create_aim(sfRenderWindow* window, sfMouseMoveEvent event);
 void link_to_last_duck(duck_t *new_duck, ui_t *ui_struct);
 void main_duck2(sfRenderWindow* window, sfSprite* sprite, duck_t *duck, ui_t *ui_struct);
-void clock_func(sfClock *clock, ui_t *ui_struct, sfTime time);
+void clock_func(sfClock *clock, ui_t *ui_struct);
 void val_start(duck_t *duck, ui_t *ui_struct);
 sfTexture* create_texture_1(sfTexture *texture);
 sfSprite* create_sprite_1(sfSprite *sprite, sfTexture* texture);
 void main_duck(sfRenderWindow* window, sfSprite* sprite, duck_t *duck, ui_t *ui_struct);
-void draw_background(sfRenderWindow* window);
+void draw_background_up(sfRenderWindow* window);
+void draw_background_down(sfRenderWindow* window);
 int display_ui_score_1(sfRenderWindow *window);
 int display_ui_score_2(sfRenderWindow *window, int score_int);
 void destroy_obj1(sfSprite* sprite, sfRenderWindow* window, sfTexture* texture);
