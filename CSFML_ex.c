@@ -42,14 +42,17 @@ void manage_mouse_click_left(sfMouseButtonEvent event, duck_t *duck, ui_t *ui_st
         sound_empty();
     } else {
         sound_fire();
+        ui_struct->flash = 255;
         ui_struct->ammo -= 1; 
         if (duck->health == 1)
             duck->health = 1;
         if (event.x <= duck->pos_x_max && event.x >= duck->pos_x_min &&
         event.y <= duck->pos_y_max && event.y >= duck->pos_y_min) {
             duck->health = 1;
-        } else
+        } else {
+            duck->is_death = 1;
             duck->health = 0;
+        }
     }
 }
 
@@ -205,7 +208,7 @@ void create_aim(sfRenderWindow* window, sfMouseMoveEvent event)
 
     position_aim.x = event.x-18.5;
     position_aim.y = event.y-18.5;
-    texture_aim = sfTexture_create(800, 800);
+    texture_aim = sfTexture_create(1920, 1080);
     texture_aim = sfTexture_createFromFile("aim.png", NULL);
     sprite_aim = sfSprite_create();
     sfSprite_setTexture(sprite_aim, texture_aim, sfTrue);
@@ -215,6 +218,32 @@ void create_aim(sfRenderWindow* window, sfMouseMoveEvent event)
     sfRenderWindow_drawSprite(window, sprite_aim, NULL);
 }
 
+void create_flash(sfRenderWindow* window, ui_t *ui_struct)
+{
+    sfTexture* texture_flash;
+    sfSprite* sprite_flash;
+    sfColor color;
+    sfVector2f scale;
+
+    scale.x = 9;
+    scale.y = 4.5;
+    color.r = 255;
+    color.g = 255;
+    color.b = 255;
+    color.a = ui_struct->flash;
+    if (ui_struct->flash > 0)
+        ui_struct->flash -= 17;
+    else if (ui_struct->flash < 0)
+        ui_struct->flash = 0;
+    texture_flash = sfTexture_create(1920, 1080);
+    texture_flash = sfTexture_createFromFile("white.png", NULL);
+    sprite_flash = sfSprite_create();
+    sfSprite_setTexture(sprite_flash, texture_flash, sfTrue);
+    sfSprite_setScale(sprite_flash, scale);
+    sfSprite_setColor(sprite_flash, color);
+    sfRenderWindow_drawSprite(window, sprite_flash, NULL);
+}
+
 void draw_bullet(sfRenderWindow* window, ui_t *ui_struct)
 {
     sfTexture* texture_bullet;
@@ -222,14 +251,14 @@ void draw_bullet(sfRenderWindow* window, ui_t *ui_struct)
     sfVector2f position_bullet;
     sfVector2f scale;
 
-    scale.x = 1.75;
-    scale.y = 1.75;
+    scale.x = 3.5;
+    scale.y = 3.5;
     texture_bullet = sfTexture_create(800, 800);
     texture_bullet = sfTexture_createFromFile("ammo.png", NULL);
     sprite_bullet = sfSprite_create();
     sfSprite_setScale(sprite_bullet, scale);
-    position_bullet.x = 74;
-    position_bullet.y = 519;
+    position_bullet.x = 185;
+    position_bullet.y = 880;
     sfSprite_setTexture(sprite_bullet, texture_bullet, sfTrue);
     draw_bullet_2(window, ui_struct, sprite_bullet, position_bullet);
     position_bullet.x = 0;
@@ -243,14 +272,14 @@ void draw_bullet_2(sfRenderWindow* window, ui_t *ui_struct, sfSprite* sprite_bul
         sfRenderWindow_drawSprite(window, sprite_bullet, NULL);
     }
     if (ui_struct->ammo >= 2) {
-        position_bullet.x = 100;
-        position_bullet.y = 519;
+        position_bullet.x = 245;
+        position_bullet.y = 880;
         sfSprite_setPosition(sprite_bullet, position_bullet);
         sfRenderWindow_drawSprite(window, sprite_bullet, NULL);
     }
     if (ui_struct->ammo >= 3) {
-        position_bullet.x = 126;
-        position_bullet.y = 519;
+        position_bullet.x = 305;
+        position_bullet.y = 880;
         sfSprite_setPosition(sprite_bullet, position_bullet);
         sfRenderWindow_drawSprite(window, sprite_bullet, NULL);
     }
@@ -258,7 +287,7 @@ void draw_bullet_2(sfRenderWindow* window, ui_t *ui_struct, sfSprite* sprite_bul
 
 int main()
 {
-    sfVideoMode mode = {800, 600, 32};
+    sfVideoMode mode = {1920, 1080, 32};
     sfRenderWindow* window;
     sfSprite* sprite;
     sfTexture* texture;
@@ -280,12 +309,14 @@ int main()
         return EXIT_FAILURE;
     music_game();
     val_start(duck, ui_struct);
+    Set_Spawn_Pos(window, sprite);
     sfRenderWindow_setFramerateLimit(window, 30);
     while (sfRenderWindow_isOpen(window)) {
         while (sfRenderWindow_pollEvent(window, &event)) {
             analyse_events(window, event, duck, ui_struct);
         }
         sfRenderWindow_clear(window, sfBlack);
+        sfRenderWindow_setMouseCursorVisible(window, sfFalse);
         clock_func(clock, ui_struct, time);
         draw_background(window);
         draw_bullet(window, ui_struct);
@@ -293,7 +324,7 @@ int main()
         //for (; nbr_of_duck != 0; nbr_of_duck--)
             main_duck(window, sprite, duck, ui_struct);
         //nbr_of_duck = nbr_of_nbr_duck;
-
+        create_flash(window, ui_struct);
         sfRenderWindow_display(window);
     }
     destroy_obj1(sprite, window, texture);
@@ -314,10 +345,8 @@ void main_duck(sfRenderWindow* window, sfSprite* sprite, duck_t *duck, ui_t *ui_
             duck->time_to_Death++;
         }
         if (duck->time_to_Death == 18) {
-            position_duck.x = 0;
-            position_duck.y = 0;
+            Set_Spawn_Pos(window, sprite);
             ui_struct->score += 100;
-            sfSprite_setPosition(sprite, position_duck);
             duck->time_to_Death = 0;
             duck->health = 0;
         }
@@ -328,9 +357,9 @@ void main_duck(sfRenderWindow* window, sfSprite* sprite, duck_t *duck, ui_t *ui_
     draw_druck(window, sprite, rect, duck);
     duck_pos(sprite, position_duck, duck);
     if (duck->health == 0)
-        move_duck(sprite, position_duck, 3, 1);
+        move_duck(sprite, position_duck, 6, 2);
     else
-        move_duck(sprite, position_duck, 0, 6);
+        move_duck(sprite, position_duck, 0, 11);
 
     link_to_last_duck(duck, ui_struct);
 }
@@ -340,8 +369,8 @@ int display_ui_score_1(sfRenderWindow *window)
     int c = 0;
     sfVector2f position_score;
 
-    position_score.x = 608;
-    position_score.y = 512;
+    position_score.x = 1465;
+    position_score.y = 865;
     if (c == 0) {
         sfFont* font;
         sfText *score;
@@ -349,7 +378,7 @@ int display_ui_score_1(sfRenderWindow *window)
         score = sfText_create();
         sfText_setString(score, "Score :");
         sfText_setFont(score, font);
-        sfText_setCharacterSize(score, 40);
+        sfText_setCharacterSize(score, 80);
         sfText_setOutlineColor(score, sfWhite);
         sfText_setOutlineThickness(score, 2);
         sfText_setPosition(score, position_score);
@@ -366,8 +395,8 @@ int display_ui_score_2(sfRenderWindow *window, int score_int)
     char* score_char;
     score_char = my_itoa(score_int);
 
-    position_score.x = 678;
-    position_score.y = 512;
+    position_score.x = 1620;
+    position_score.y = 865;
     if (c == 0) {
         sfFont* font;
         sfText *score;
@@ -375,7 +404,7 @@ int display_ui_score_2(sfRenderWindow *window, int score_int)
         score = sfText_create();
         sfText_setString(score, score_char);
         sfText_setFont(score, font);
-        sfText_setCharacterSize(score, 40);
+        sfText_setCharacterSize(score, 80);
         sfText_setOutlineColor(score, sfWhite);
         sfText_setOutlineThickness(score, 2);
         sfText_setPosition(score, position_score);
@@ -411,10 +440,10 @@ void destroy_obj1(sfSprite* sprite, sfRenderWindow* window, sfTexture* texture)
 void duck_pos(sfSprite* sprite, sfVector2f position_duck, duck_t *duck)
 {
     position_duck = sfSprite_getPosition(sprite);
-    duck->pos_x_max = position_duck.x+110;
-    duck->pos_x_min = position_duck.x-110;
+    duck->pos_x_max = position_duck.x+140;
+    duck->pos_x_min = position_duck.x;
     duck->pos_y_max = position_duck.y+110;
-    duck->pos_y_min = position_duck.y-110;
+    duck->pos_y_min = position_duck.y;
 }
 
 void move_duck(sfSprite* sprite, sfVector2f position_duck, int speed_x, int speed_y)
@@ -433,9 +462,9 @@ void draw_background(sfRenderWindow* window)
     sfSprite* sprite_background;
     sfVector2f scale;
 
-    scale.x = 3.15;
-    scale.y = 2.5;
-    texture_background = sfTexture_create(800, 800);
+    scale.x = 7.6;
+    scale.y = 4.25;
+    texture_background = sfTexture_create(1920, 1080);
     texture_background = sfTexture_createFromFile("background.png", NULL);
     sprite_background = sfSprite_create();
     sfSprite_setTexture(sprite_background, texture_background, sfTrue);
@@ -447,6 +476,9 @@ void draw_druck(sfRenderWindow* window, sfSprite* sprite, sfIntRect rect, duck_t
 {
     sfVector2f scale;
 
+    if (duck->is_death == 1) {
+        duck->is_death = 0;
+    }
     if (duck->offset > 231) {
         rect.width = 20;
         rect.height = 40;
@@ -454,11 +486,20 @@ void draw_druck(sfRenderWindow* window, sfSprite* sprite, sfIntRect rect, duck_t
         rect.width = 40;
         rect.height = 40;
     }
-    scale.x = 3;
-    scale.y = 3;
+    scale.x = 3.5;
+    scale.y = 3.5;
     rect.top = 0;
     rect.left = duck->offset;
     sfSprite_setScale(sprite, scale);
     sfRenderWindow_drawSprite(window, sprite, NULL);
     sfSprite_setTextureRect(sprite, rect);
+}
+
+void Set_Spawn_Pos(sfRenderWindow* window, sfSprite* sprite)
+{
+    sfVector2f duck_pos;
+
+    duck_pos.x = -300;
+    duck_pos.y = -300;
+    sfSprite_setPosition(sprite, duck_pos);
 }

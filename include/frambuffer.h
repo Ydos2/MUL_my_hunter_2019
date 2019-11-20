@@ -44,6 +44,7 @@ typedef struct duck {
     int pos_y_max;
     int offset;
     int time_to_Death;
+    int is_death;
     struct duck *next;
 } duck_t;
 
@@ -54,9 +55,12 @@ typedef struct ui {
     int score;
     int round;
     float seconds;
+    int flash;
     struct duck *duck_list;
 } ui_t;
 
+void create_flash(sfRenderWindow* window, ui_t *ui_struct);
+void Set_Spawn_Pos(sfRenderWindow* window, sfSprite* sprite);
 void manage_mouse_click_start(sfMouseButtonEvent event, duck_t *duck, ui_t *ui_struct);
 void draw_bullet(sfRenderWindow* window, ui_t *ui_struct);
 void draw_bullet_2(sfRenderWindow* window, ui_t *ui_struct, sfSprite* sprite_bullet, sfVector2f position_bullet);
