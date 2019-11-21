@@ -8,7 +8,7 @@
 #include "include/frambuffer.h"
 #include "include/my.h"
 
-void sound_fire()
+void sound_fire(void)
 {
     sfSound *fire_sound;
     float volume = 50;
@@ -21,7 +21,7 @@ void sound_fire()
     sfSound_play(fire_sound);
 }
 
-void sound_empty()
+void sound_empty(void)
 {
     sfSound *empty_sound;
     float volume = 50;
@@ -34,7 +34,7 @@ void sound_empty()
     sfSound_play(empty_sound);
 }
 
-void sound_reload()
+void sound_reload(void)
 {
     sfSound *fire_sound;
     float volume = 50;
@@ -47,14 +47,13 @@ void sound_reload()
     sfSound_play(fire_sound);
 }
 
-void music_game()
+void music_game(ui_t *ui_struct)
 {
-    sfMusic *music_sound;
     float volume = 10;
     sfBool loop;
 
-    music_sound = sfMusic_createFromFile("./sound/back-country-chase.wav");
-    sfMusic_setVolume(music_sound, volume);
-    sfMusic_setLoop(music_sound, loop);
-    sfMusic_play(music_sound);
+    ui_struct->music_sound = sfMusic_createFromFile("./sound/country.wav");
+    sfMusic_setVolume(ui_struct->music_sound, volume);
+    sfMusic_setLoop(ui_struct->music_sound, loop);
+    sfMusic_play(ui_struct->music_sound);
 }

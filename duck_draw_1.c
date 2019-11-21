@@ -26,32 +26,6 @@ void create_aim(sfRenderWindow* window, sfMouseMoveEvent event)
     sfRenderWindow_drawSprite(window, sprite_aim, NULL);
 }
 
-void create_flash(sfRenderWindow* window, ui_t *ui_struct)
-{
-    sfTexture* texture_flash;
-    sfSprite* sprite_flash;
-    sfColor color;
-    sfVector2f scale;
-
-    scale.x = 9;
-    scale.y = 4.5;
-    color.r = 255;
-    color.g = 255;
-    color.b = 255;
-    color.a = ui_struct->flash;
-    if (ui_struct->flash > 0)
-        ui_struct->flash -= 17;
-    else if (ui_struct->flash < 0)
-        ui_struct->flash = 0;
-    texture_flash = sfTexture_create(1920, 1080);
-    texture_flash = sfTexture_createFromFile("./texture/white.png", NULL);
-    sprite_flash = sfSprite_create();
-    sfSprite_setTexture(sprite_flash, texture_flash, sfTrue);
-    sfSprite_setScale(sprite_flash, scale);
-    sfSprite_setColor(sprite_flash, color);
-    sfRenderWindow_drawSprite(window, sprite_flash, NULL);
-}
-
 void draw_bullet(sfRenderWindow* window, ui_t *ui_struct)
 {
     sfTexture* texture_bullet;
@@ -73,7 +47,8 @@ void draw_bullet(sfRenderWindow* window, ui_t *ui_struct)
     position_bullet.y = 0;
 }
 
-void draw_bullet_2(sfRenderWindow* window, ui_t *ui_struct, sfSprite* sprite_bullet, sfVector2f position_bullet)
+void draw_bullet_2(sfRenderWindow* window, ui_t *ui_struct,
+                sfSprite* sprite_bullet, sfVector2f position_bullet)
 {
     if (ui_struct->ammo >= 1) {
         sfSprite_setPosition(sprite_bullet, position_bullet);
@@ -114,7 +89,8 @@ void draw_health(sfRenderWindow* window, ui_t *ui_struct)
     position_health.y = 0;
 }
 
-void draw_health_2(sfRenderWindow* window, ui_t *ui_struct, sfSprite* sprite_health, sfVector2f position_health)
+void draw_health_2(sfRenderWindow* window, ui_t *ui_struct,
+                sfSprite* sprite_health, sfVector2f position_health)
 {
     if (ui_struct->player_health >= 1) {
         sfSprite_setPosition(sprite_health, position_health);

@@ -30,12 +30,6 @@
 #ifndef FRAMEBUFFER_H_
 #define FRAMEBUFFER_H_
 
-typedef struct framebuffer {
-    unsigned int width;
-    unsigned int height;
-    unsigned char *pixels;
-} framebuffer_t;
-
 typedef struct duck {
     int health;
     int pos_x_min;
@@ -46,10 +40,12 @@ typedef struct duck {
     int spawn;
     int time_to_Death;
     int is_death;
-    struct duck *next;
+    int duck_pos_win;
 } duck_t;
 
 typedef struct ui {
+    int menu;
+    int button_start;
     int player_health;
     int ammo;
     int ammo_pos_x;
@@ -61,34 +57,56 @@ typedef struct ui {
     int flash;
     int scrore_mult;
     sfTime time;
+    sfMusic *music_sound;
     struct duck *duck_list;
 } ui_t;
 
+void main_extend_1(sfRenderWindow *window, ui_t *ui_struct, sfClock *clock);
+void duck_die_anim(sfSprite* sprite,
+            duck_t *duck, ui_t *ui_struct);
+void pos_life(sfVector2f position_duck, sfSprite* sprite,
+            duck_t *duck, ui_t *ui_struct);
+void analyse_events(sfRenderWindow *window, sfEvent event,
+                    duck_t *duck, ui_t *ui_struct);
+void display_ui_menu(sfRenderWindow *window);
+void manage_mouse_click_gameover(sfMouseButtonEvent event,
+                                duck_t *duck, ui_t *ui_struct);
+void real_move(sfSprite* sprite, duck_t *duck, ui_t *ui_struct);
+void display_ui_gameover(sfRenderWindow *window);
+void menu(sfRenderWindow *window, ui_t *ui_struct);
+void game_over(sfRenderWindow *window, ui_t *ui_struct);
 void move_rect_duck_flip(duck_t *duck, int max_value);
 void draw_health(sfRenderWindow* window, ui_t *ui_struct);
-void draw_health_2(sfRenderWindow* window, ui_t *ui_struct, sfSprite* sprite_bullet, sfVector2f position_bullet);
+void draw_health_2(sfRenderWindow* window, ui_t *ui_struct,
+                sfSprite* sprite_health, sfVector2f position_health);
 void extend_window_open(sfRenderWindow *window, ui_t *ui_struct, sfEvent event);
 int help(int ac, char **av);
 void display_ui_mult_score_1(sfRenderWindow *window);
 void display_ui_mult_score_2(sfRenderWindow *window, ui_t *ui_struct);
 void create_flash(sfRenderWindow* window, ui_t *ui_struct);
-void Set_Spawn_Pos(sfRenderWindow* window, sfSprite* sprite, ui_t *ui_struct);
-void manage_mouse_click_start(sfMouseButtonEvent event, duck_t *duck, ui_t *ui_struct);
+void Set_Spawn_Pos_1(sfSprite* sprite, ui_t *ui_struct, duck_t *duck);
+void Set_Spawn_Pos_2(int x, sfSprite* sprite, duck_t *duck,
+                    sfVector2f duck_pos);
+void Set_Spawn_Pos_3(int x, sfSprite* sprite, duck_t *duck,
+                    sfVector2f duck_pos);
+void manage_mouse_click_start(sfMouseButtonEvent event,
+                            duck_t *duck, ui_t *ui_struct);
 void draw_bullet(sfRenderWindow* window, ui_t *ui_struct);
-void draw_bullet_2(sfRenderWindow* window, ui_t *ui_struct, sfSprite* sprite_bullet, sfVector2f position_bullet);
+void draw_bullet_2(sfRenderWindow* window, ui_t *ui_struct,
+                sfSprite* sprite_bullet, sfVector2f position_bullet);
 void create_aim(sfRenderWindow* window, sfMouseMoveEvent event);
-void link_to_last_duck(duck_t *new_duck, ui_t *ui_struct);
-void main_duck2(sfRenderWindow* window, sfSprite* sprite, duck_t *duck, ui_t *ui_struct);
 void clock_func(sfClock *clock, ui_t *ui_struct);
 void val_start(duck_t *duck, ui_t *ui_struct);
 sfTexture* create_texture_1(sfTexture *texture);
 sfSprite* create_sprite_1(sfSprite *sprite, sfTexture* texture);
-void main_duck(sfRenderWindow* window, sfSprite* sprite, duck_t *duck, ui_t *ui_struct);
+void main_duck(sfRenderWindow* window, sfSprite* sprite,
+            duck_t *duck, ui_t *ui_struct);
 void draw_background_up(sfRenderWindow* window);
 void draw_background_down(sfRenderWindow* window);
 void display_ui_score_1(sfRenderWindow *window);
 void display_ui_score_2(sfRenderWindow *window, ui_t *ui_struct);
-void destroy_obj1(sfSprite* sprite, sfRenderWindow* window, sfTexture* texture);
+void destroy_obj1(sfSprite* sprite, sfRenderWindow* window,
+                    sfTexture* texture, ui_t *ui);
 void sound_fire();
 void sound_empty();
 void sound_reload();
@@ -96,11 +114,16 @@ void music_game();
 void move_rect_duck(duck_t *duck, int max_value);
 void move_rect_duck_die(duck_t *duck, int max_value);
 void duck_pos(sfSprite* sprite, sfVector2f position_duck, duck_t *duck);
-void draw_druck(sfRenderWindow* window, sfSprite* sprite, sfIntRect rect, duck_t *duck);
-void move_duck_up(sfSprite* sprite, sfVector2f position_duck, int speed_x, int speed_y);
-void move_duck_down(sfSprite* sprite, sfVector2f position_duck, int speed_x, int speed_y);
-framebuffer_t *framebuffer_create(unsigned int width, unsigned int height);
-void analyse_events(sfRenderWindow *window, sfEvent event, duck_t *duck, ui_t *ui_struct);
-void manage_mouse_click_left(sfMouseButtonEvent event, duck_t *duck, ui_t *ui_struct);
-void manage_mouse_click_right(sfMouseButtonEvent event, duck_t *duck, ui_t *ui_struct);
+void draw_druck(sfRenderWindow* window, sfSprite* sprite,
+                sfIntRect rect, duck_t *duck);
+void move_duck_up(sfSprite* sprite, sfVector2f position_duck,
+                int speed_x, int speed_y);
+void move_duck_down(sfSprite* sprite, sfVector2f position_duck,
+                    int speed_x, int speed_y);
+void manage_mouse_click_gameover(sfMouseButtonEvent event,
+                                duck_t *duck, ui_t *ui_struct);
+void manage_mouse_click_left(sfMouseButtonEvent event, duck_t *duck,
+                            ui_t *ui_struct);
+void manage_mouse_click_right(sfMouseButtonEvent event, duck_t *duck,
+                            ui_t *ui_struct);
 #endif /*FRAMBUFFER_H_ */

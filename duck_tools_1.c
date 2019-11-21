@@ -28,6 +28,7 @@ void val_start(duck_t *duck, ui_t *ui_struct)
     ui_struct->score = 0, ui_struct->ammo = 3, ui_struct->scrore_mult = 0;
     ui_struct->ammo_pos_x = 50, ui_struct->ammo_pos_y = 500;
     ui_struct->player_health = 3;
+    ui_struct->flash = 255;
 }
 
 void clock_func(sfClock *clock, ui_t *ui_struct)
@@ -38,10 +39,12 @@ void clock_func(sfClock *clock, ui_t *ui_struct)
         sfClock_restart(clock);
 }
 
-void destroy_obj1(sfSprite* sprite, sfRenderWindow* window, sfTexture* texture)
+void destroy_obj1(sfSprite* sprite, sfRenderWindow* window,
+                    sfTexture* texture, ui_t *ui)
 {
     sfSprite_destroy(sprite);
     sfTexture_destroy(texture);
     sfRenderWindow_destroy(window);
-    //sfMusic_destroy(sfMusic* music);
+    sfMusic_stop(ui->music_sound);
+    sfMusic_destroy(ui->music_sound);
 }

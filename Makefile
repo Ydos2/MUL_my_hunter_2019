@@ -10,15 +10,18 @@ DIRLIB		=./lib/
 DIRLIBMY		=./lib/my/
 DIRTEST		=./tests/*.c
 
-SRC		=	duck_anim_1.c	\
-			duck_draw_1.c	\
-			duck_draw_2.c	\
-			duck_event.c	\
-			duck_main.c		\
-			duck_script.c	\
-			duck_sound.c	\
-			duck_tools_1.c	\
-			duck_ui.c
+SRC		=	duck_anim_1.c		\
+			duck_draw_1.c		\
+			duck_draw_2.c		\
+			duck_event.c		\
+			duck_main.c			\
+			duck_script.c		\
+			duck_sound.c		\
+			duck_tools_1.c		\
+			duck_ui.c			\
+			ui_menu.c			\
+			duck_script_ai.c	\
+			main_extend.c
 
 SRC_TESTS	=	criterion.c
 
