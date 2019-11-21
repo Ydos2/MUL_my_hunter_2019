@@ -9,6 +9,7 @@ NAMELIB		= libmy.a
 DIRLIB		=./lib/
 DIRLIBMY		=./lib/my/
 DIRTEST		=./tests/*.c
+
 SRC		=	duck_anim_1.c	\
 			duck_draw_1.c	\
 			duck_draw_2.c	\
@@ -17,10 +18,13 @@ SRC		=	duck_anim_1.c	\
 			duck_script.c	\
 			duck_sound.c	\
 			duck_tools_1.c	\
-			duck_ui.c	\
+			duck_ui.c
+
+SRC_TESTS	=	criterion.c
+
 COMPIL		= gcc $(SRC) -L $(DIRLIB) -lmy -l csfml-graphics -l csfml-system -l csfml-audio -o $(EXEC)
-COMPIL_DEBUG		= gcc *.c -L $(DIRLIB) -lmy -l csfml-graphics -l csfml-system -l csfml-audio -o $(EXEC) -g3
-COMPIL_TEST		= gcc *.c -g3 -L $(DIRLIB) $(DIRTEST) --coverage -lcriterion -lmy -o $(EXEC_TEST)
+COMPIL_DEBUG		= gcc $(SRC) -L $(DIRLIB) -lmy -l csfml-graphics -l csfml-system -l csfml-audio -o $(EXEC) -g3
+COMPIL_TEST		= gcc $(SRC) -g3 -L $(DIRLIB) $(DIRTEST) --coverage -lcriterion -lmy -l csfml-graphics -l csfml-system -l csfml-audio -o $(EXEC_TEST)
 EXEC		= my_hunter
 EXEC_TEST		= tests_my_hunter
 RUN_TESTS	=	./$(EXEC_TEST)

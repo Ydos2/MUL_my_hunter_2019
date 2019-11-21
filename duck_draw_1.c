@@ -92,3 +92,44 @@ void draw_bullet_2(sfRenderWindow* window, ui_t *ui_struct, sfSprite* sprite_bul
         sfRenderWindow_drawSprite(window, sprite_bullet, NULL);
     }
 }
+
+void draw_health(sfRenderWindow* window, ui_t *ui_struct)
+{
+    sfTexture* texture_health;
+    sfSprite* sprite_health;
+    sfVector2f position_health;
+    sfVector2f scale;
+
+    scale.x = 0.425;
+    scale.y = 0.425;
+    texture_health = sfTexture_create(800, 800);
+    texture_health = sfTexture_createFromFile("./texture/heart.png", NULL);
+    sprite_health = sfSprite_create();
+    sfSprite_setScale(sprite_health, scale);
+    position_health.x = 1040;
+    position_health.y = 877;
+    sfSprite_setTexture(sprite_health, texture_health, sfTrue);
+    draw_health_2(window, ui_struct, sprite_health, position_health);
+    position_health.x = 0;
+    position_health.y = 0;
+}
+
+void draw_health_2(sfRenderWindow* window, ui_t *ui_struct, sfSprite* sprite_health, sfVector2f position_health)
+{
+    if (ui_struct->player_health >= 1) {
+        sfSprite_setPosition(sprite_health, position_health);
+        sfRenderWindow_drawSprite(window, sprite_health, NULL);
+    }
+    if (ui_struct->player_health >= 2) {
+        position_health.x = 1140;
+        position_health.y = 877;
+        sfSprite_setPosition(sprite_health, position_health);
+        sfRenderWindow_drawSprite(window, sprite_health, NULL);
+    }
+    if (ui_struct->player_health >= 3) {
+        position_health.x = 1240;
+        position_health.y = 877;
+        sfSprite_setPosition(sprite_health, position_health);
+        sfRenderWindow_drawSprite(window, sprite_health, NULL);
+    }
+}

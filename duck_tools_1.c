@@ -25,8 +25,9 @@ sfSprite* create_sprite_1(sfSprite *sprite, sfTexture* texture)
 void val_start(duck_t *duck, ui_t *ui_struct)
 {
     duck->health = 0, duck->offset = 0;
-    ui_struct->score = 0, ui_struct->ammo = 3;
+    ui_struct->score = 0, ui_struct->ammo = 3, ui_struct->scrore_mult = 0;
     ui_struct->ammo_pos_x = 50, ui_struct->ammo_pos_y = 500;
+    ui_struct->player_health = 3;
 }
 
 void clock_func(sfClock *clock, ui_t *ui_struct)

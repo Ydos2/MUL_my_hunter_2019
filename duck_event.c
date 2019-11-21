@@ -47,9 +47,11 @@ void manage_mouse_click_left(sfMouseButtonEvent event, duck_t *duck, ui_t *ui_st
         if (event.x <= duck->pos_x_max && event.x >= duck->pos_x_min &&
         event.y <= duck->pos_y_max && event.y >= duck->pos_y_min) {
             duck->health = 1;
+            ui_struct->score += 100 + ui_struct->scrore_mult;
+            ui_struct->scrore_mult += 10;
         } else {
             duck->is_death = 1;
-            duck->health = 0;
+            ui_struct->scrore_mult = 0;
         }
     }
 }
