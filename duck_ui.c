@@ -27,6 +27,7 @@ void display_ui_score_1(sfRenderWindow *window)
     sfText_setPosition(score, position_score);
     sfText_setColor(score, sfBlack);
     sfRenderWindow_drawText(window, score, NULL);
+    free(font);
 }
 
 void display_ui_score_2(sfRenderWindow *window, ui_t *ui_struct)
@@ -49,6 +50,7 @@ void display_ui_score_2(sfRenderWindow *window, ui_t *ui_struct)
     sfText_setPosition(score, position_score);
     sfText_setColor(score, sfBlack);
     sfRenderWindow_drawText(window, score, NULL);
+    free(font);
 }
 
 void display_ui_mult_score_1(sfRenderWindow *window)
@@ -70,6 +72,7 @@ void display_ui_mult_score_1(sfRenderWindow *window)
     sfText_setPosition(score, position_score);
     sfText_setColor(score, sfBlack);
     sfRenderWindow_drawText(window, score, NULL);
+    free(font);
 }
 
 void display_ui_mult_score_2(sfRenderWindow *window, ui_t *ui_struct)
@@ -80,8 +83,8 @@ void display_ui_mult_score_2(sfRenderWindow *window, ui_t *ui_struct)
 
     position_score.x = 685;
     position_score.y = 865;
-    sfFont* font;
-    sfText *score;
+    sfFont* font = NULL;
+    sfText *score = NULL;
     font = sfFont_createFromFile("krisha/Krisha-Regular.otf");
     score = sfText_create();
     sfText_setString(score, score_char);
@@ -92,6 +95,7 @@ void display_ui_mult_score_2(sfRenderWindow *window, ui_t *ui_struct)
     sfText_setPosition(score, position_score);
     sfText_setColor(score, sfBlack);
     sfRenderWindow_drawText(window, score, NULL);
+    free(font);
 }
 
 void display_ui_gameover(sfRenderWindow *window)
@@ -101,19 +105,17 @@ void display_ui_gameover(sfRenderWindow *window)
 
     position_score.x = 650;
     position_score.y = 350;
-    if (c == 0) {
-        sfFont* font;
-        sfText *score;
-        font = sfFont_createFromFile("krisha/Krisha-Regular.otf");
-        score = sfText_create();
-        sfText_setString(score, "Game Over");
-        sfText_setFont(score, font);
-        sfText_setCharacterSize(score, 200);
-        sfText_setOutlineColor(score, sfWhite);
-        sfText_setOutlineThickness(score, 2);
-        sfText_setPosition(score, position_score);
-        sfText_setColor(score, sfBlack);
-        sfRenderWindow_drawText(window, score, NULL);
-        c++;
-    }
+    sfFont* font = NULL;
+    sfText *score = NULL;
+    font = sfFont_createFromFile("krisha/Krisha-Regular.otf");
+    score = sfText_create();
+    sfText_setString(score, "Game Over");
+    sfText_setFont(score, font);
+    sfText_setCharacterSize(score, 200);
+    sfText_setOutlineColor(score, sfWhite);
+    sfText_setOutlineThickness(score, 2);
+    sfText_setPosition(score, position_score);
+    sfText_setColor(score, sfBlack);
+    sfRenderWindow_drawText(window, score, NULL);
+    free(font);
 }

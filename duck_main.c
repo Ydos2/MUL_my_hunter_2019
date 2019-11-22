@@ -11,13 +11,13 @@
 int main(int ac, char **av)
 {
     sfVideoMode mode = {1920, 1080, 32};
-    sfRenderWindow* window;
-    sfSprite* sprite;
-    sfTexture* texture;
+    sfRenderWindow* window = NULL;
+    sfSprite* sprite = NULL;
+    sfTexture* texture = NULL;
     sfEvent event;
-    sfClock *clock;
-    duck_t *duck;
-    ui_t *ui_struct;
+    sfClock *clock = NULL;
+    duck_t *duck = NULL;
+    ui_t *ui_struct = NULL;
     int help_int = 0, nbr_of_duck = 2, nbr_of_nbr_duck = nbr_of_duck;
     float seconds;
 
@@ -46,6 +46,7 @@ int main(int ac, char **av)
         extend_window_open(window, ui_struct, event);
     }
     destroy_obj1(sprite, window, texture, ui_struct);
+    free(texture);
     return EXIT_SUCCESS;
 }
 
@@ -67,13 +68,13 @@ int help(int ac, char **av)
 {
     if (ac == 2 && av[1][0] == '-' && av[1][1] == 'h') {
         my_putstr("USAGE :\n");
-        my_putstr("    ./my_hunter\n");
+        my_putstr("\t./my_hunter\n");
         my_putstr("DESCRIPTION :\n");
-        my_putstr("    You must kill the duck\n");
-        my_putstr("    For fire you must use the left click on the duck\n");
-        my_putstr("    For reload you must use the right click\n");
-        my_putstr("    If the duck run away you lose one heart\n");
-        my_putstr("    At 0 life you have a GAME OVER\n");
+        my_putstr("\tYou must kill the duck\n");
+        my_putstr("\tFor fire you must use the left click on the duck\n");
+        my_putstr("\tFor reload you must use the right click\n");
+        my_putstr("\tIf the duck run away you lose one heart\n");
+        my_putstr("\tAt 0 life you have a GAME OVER\n");
         return (1);
     } else {
         return (0);

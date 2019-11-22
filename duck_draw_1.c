@@ -10,8 +10,8 @@
 
 void create_aim(sfRenderWindow* window, sfMouseMoveEvent event)
 {
-    sfTexture* texture_aim;
-    sfSprite* sprite_aim;
+    sfTexture* texture_aim = NULL;
+    sfSprite* sprite_aim = NULL;
     sfVector2f position_aim;
 
     position_aim.x = event.x-18.5;
@@ -28,8 +28,8 @@ void create_aim(sfRenderWindow* window, sfMouseMoveEvent event)
 
 void draw_bullet(sfRenderWindow* window, ui_t *ui_struct)
 {
-    sfTexture* texture_bullet;
-    sfSprite* sprite_bullet;
+    sfTexture* texture_bullet = NULL;
+    sfSprite* sprite_bullet = NULL;
     sfVector2f position_bullet;
     sfVector2f scale;
 
@@ -70,8 +70,8 @@ void draw_bullet_2(sfRenderWindow* window, ui_t *ui_struct,
 
 void draw_health(sfRenderWindow* window, ui_t *ui_struct)
 {
-    sfTexture* texture_health;
-    sfSprite* sprite_health;
+    sfTexture* texture_health = NULL;
+    sfSprite* sprite_health = NULL;
     sfVector2f position_health;
     sfVector2f scale;
 

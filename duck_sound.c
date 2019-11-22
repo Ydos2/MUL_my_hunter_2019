@@ -10,11 +10,11 @@
 
 void sound_fire(void)
 {
-    sfSound *fire_sound;
+    sfSound *fire_sound = NULL;
     float volume = 50;
-    sfSoundBuffer* buffer;
+    sfSoundBuffer* buffer = NULL;
 
-    buffer = sfSoundBuffer_createFromFile("./sound/Gun+1.wav");
+    buffer = sfSoundBuffer_createFromFile("./sound/Gun+1.ogg");
     fire_sound = sfSound_create();
     sfSound_setBuffer(fire_sound, buffer);
     sfSound_setVolume(fire_sound, volume);
@@ -23,11 +23,11 @@ void sound_fire(void)
 
 void sound_empty(void)
 {
-    sfSound *empty_sound;
+    sfSound *empty_sound = NULL;
     float volume = 50;
-    sfSoundBuffer* buffer;
+    sfSoundBuffer* buffer = NULL;
 
-    buffer = sfSoundBuffer_createFromFile("./sound/Gun+Empty.wav");
+    buffer = sfSoundBuffer_createFromFile("./sound/Gun+Empty.ogg");
     empty_sound = sfSound_create();
     sfSound_setBuffer(empty_sound, buffer);
     sfSound_setVolume(empty_sound, volume);
@@ -36,11 +36,11 @@ void sound_empty(void)
 
 void sound_reload(void)
 {
-    sfSound *fire_sound;
+    sfSound *fire_sound = NULL;
     float volume = 50;
-    sfSoundBuffer* buffer;
+    sfSoundBuffer* buffer = NULL;
 
-    buffer = sfSoundBuffer_createFromFile("./sound/Gun+Reload.wav");
+    buffer = sfSoundBuffer_createFromFile("./sound/Gun+Reload.ogg");
     fire_sound = sfSound_create();
     sfSound_setBuffer(fire_sound, buffer);
     sfSound_setVolume(fire_sound, volume);
@@ -50,9 +50,9 @@ void sound_reload(void)
 void music_game(ui_t *ui_struct)
 {
     float volume = 10;
-    sfBool loop;
+    sfBool loop = sfTrue;
 
-    ui_struct->music_sound = sfMusic_createFromFile("./sound/country.wav");
+    ui_struct->music_sound = sfMusic_createFromFile("./sound/country.ogg");
     sfMusic_setVolume(ui_struct->music_sound, volume);
     sfMusic_setLoop(ui_struct->music_sound, loop);
     sfMusic_play(ui_struct->music_sound);

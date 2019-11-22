@@ -10,8 +10,8 @@
 
 void draw_background_up(sfRenderWindow* window)
 {
-    sfTexture* texture_background;
-    sfSprite* sprite_background;
+    sfTexture* texture_background = NULL;
+    sfSprite* sprite_background = NULL;
     sfVector2f scale;
 
     scale.x = 7.6;
@@ -26,8 +26,8 @@ void draw_background_up(sfRenderWindow* window)
 
 void draw_background_down(sfRenderWindow* window)
 {
-    sfTexture* texture_background;
-    sfSprite* sprite_background;
+    sfTexture* texture_background = NULL;
+    sfSprite* sprite_background = NULL;
     sfVector2f scale;
 
     scale.x = 7.6;
@@ -42,8 +42,8 @@ void draw_background_down(sfRenderWindow* window)
 
 void create_flash(sfRenderWindow* window, ui_t *ui_struct)
 {
-    sfTexture* texture_flash;
-    sfSprite* sprite_flash;
+    sfTexture* texture_flash = NULL;
+    sfSprite* sprite_flash = NULL;
     sfColor color;
     sfVector2f scale;
 
