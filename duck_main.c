@@ -10,43 +10,26 @@
 
 int main(int ac, char **av)
 {
-    sfVideoMode mode = {1920, 1080, 32};
-    sfRenderWindow* window = NULL;
-    sfSprite* sprite = NULL;
-    sfTexture* texture = NULL;
     sfEvent event;
-    sfClock *clock = NULL;
     duck_t *duck = NULL;
     ui_t *ui_struct = NULL;
-    int help_int = 0, nbr_of_duck = 2, nbr_of_nbr_duck = nbr_of_duck;
-    float seconds;
 
-    help_int = help(ac, av);
-    if (help_int == 1)
+    for (int help_int = help(ac, av); help_int == 1;)
         return (0);
-    ui_struct = malloc(sizeof(ui_t));
     duck = malloc(sizeof(duck_t));
-    clock = sfClock_create();
-    window = sfRenderWindow_create(mode, "Duck Hunt", sfResize | sfClose, NULL);
-    texture = create_texture_1(texture);
-    sprite = create_sprite_1(sprite, texture);
-    music_game(ui_struct);
-    val_start(duck, ui_struct);
-    ui_struct->menu = 1, ui_struct->player_health = 0;
-    Set_Spawn_Pos_1(sprite, ui_struct, duck);
-    sfRenderWindow_setFramerateLimit(window, 30);
-    while (sfRenderWindow_isOpen(window)) {
-        while (sfRenderWindow_pollEvent(window, &event))
-            analyse_events(window, event, duck, ui_struct);
-        main_extend_1(window, ui_struct, clock);
+    ui_struct = malloc(sizeof(ui_t));
+    main_extend_2(ui_struct, duck);
+    while (sfRenderWindow_isOpen(ui_struct->window)) {
+        while (sfRenderWindow_pollEvent(ui_struct->window, &event))
+            analyse_events(ui_struct->window, event, duck, ui_struct);
+        main_extend_1(ui_struct->window, ui_struct);
         if (ui_struct->menu == 0) {
-            main_duck(window, sprite, duck, ui_struct);
+            main_duck(ui_struct->window, ui_struct->sprite, duck, ui_struct);
         } else
-            display_ui_menu(window);
-        extend_window_open(window, ui_struct, event);
+            display_ui_menu(ui_struct->window);
+        extend_window_open(ui_struct->window, ui_struct, event);
     }
-    destroy_obj1(sprite, window, texture, ui_struct);
-    free(texture);
+    destroy_obj1(ui_struct);
     return EXIT_SUCCESS;
 }
 

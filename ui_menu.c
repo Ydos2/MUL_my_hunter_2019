@@ -37,5 +37,5 @@ void display_ui_menu(sfRenderWindow *window)
     sfText_setPosition(score, position_score);
     sfText_setColor(score, sfBlack);
     sfRenderWindow_drawText(window, score, NULL);
-    free(font);
+    sfFont_destroy(font);
 }

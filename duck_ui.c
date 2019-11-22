@@ -27,7 +27,7 @@ void display_ui_score_1(sfRenderWindow *window)
     sfText_setPosition(score, position_score);
     sfText_setColor(score, sfBlack);
     sfRenderWindow_drawText(window, score, NULL);
-    free(font);
+    sfFont_destroy(font);
 }
 
 void display_ui_score_2(sfRenderWindow *window, ui_t *ui_struct)
@@ -50,7 +50,7 @@ void display_ui_score_2(sfRenderWindow *window, ui_t *ui_struct)
     sfText_setPosition(score, position_score);
     sfText_setColor(score, sfBlack);
     sfRenderWindow_drawText(window, score, NULL);
-    free(font);
+    sfFont_destroy(font);
 }
 
 void display_ui_mult_score_1(sfRenderWindow *window)
@@ -72,7 +72,7 @@ void display_ui_mult_score_1(sfRenderWindow *window)
     sfText_setPosition(score, position_score);
     sfText_setColor(score, sfBlack);
     sfRenderWindow_drawText(window, score, NULL);
-    free(font);
+    sfFont_destroy(font);
 }
 
 void display_ui_mult_score_2(sfRenderWindow *window, ui_t *ui_struct)
@@ -95,7 +95,7 @@ void display_ui_mult_score_2(sfRenderWindow *window, ui_t *ui_struct)
     sfText_setPosition(score, position_score);
     sfText_setColor(score, sfBlack);
     sfRenderWindow_drawText(window, score, NULL);
-    free(font);
+    sfFont_destroy(font);
 }
 
 void display_ui_gameover(sfRenderWindow *window)
@@ -117,5 +117,5 @@ void display_ui_gameover(sfRenderWindow *window)
     sfText_setPosition(score, position_score);
     sfText_setColor(score, sfBlack);
     sfRenderWindow_drawText(window, score, NULL);
-    free(font);
+    sfFont_destroy(font);
 }

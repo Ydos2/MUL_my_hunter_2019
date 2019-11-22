@@ -56,12 +56,16 @@ typedef struct ui {
     float seconds;
     int flash;
     int scrore_mult;
+    sfSprite* sprite;
+    sfTexture* texture;
     sfTime time;
+    sfClock *clock;
     sfMusic *music_sound;
-    struct duck *duck_list;
+    sfRenderWindow* window;
 } ui_t;
 
-void main_extend_1(sfRenderWindow *window, ui_t *ui_struct, sfClock *clock);
+void main_extend_2(ui_t *ui_struct, duck_t *duck);
+void main_extend_1(sfRenderWindow *window, ui_t *ui_struct);
 void duck_die_anim(sfSprite* sprite,
             duck_t *duck, ui_t *ui_struct);
 void pos_life(sfVector2f position_duck, sfSprite* sprite,
@@ -95,7 +99,7 @@ void draw_bullet(sfRenderWindow* window, ui_t *ui_struct);
 void draw_bullet_2(sfRenderWindow* window, ui_t *ui_struct,
                 sfSprite* sprite_bullet, sfVector2f position_bullet);
 void create_aim(sfRenderWindow* window, sfMouseMoveEvent event);
-void clock_func(sfClock *clock, ui_t *ui_struct);
+void clock_func(ui_t *ui_struct);
 void val_start(duck_t *duck, ui_t *ui_struct);
 sfTexture* create_texture_1(sfTexture *texture);
 sfSprite* create_sprite_1(sfSprite *sprite, sfTexture* texture);
@@ -105,8 +109,7 @@ void draw_background_up(sfRenderWindow* window);
 void draw_background_down(sfRenderWindow* window);
 void display_ui_score_1(sfRenderWindow *window);
 void display_ui_score_2(sfRenderWindow *window, ui_t *ui_struct);
-void destroy_obj1(sfSprite* sprite, sfRenderWindow* window,
-                    sfTexture* texture, ui_t *ui);
+void destroy_obj1(ui_t *ui);
 void sound_fire();
 void sound_empty();
 void sound_reload();

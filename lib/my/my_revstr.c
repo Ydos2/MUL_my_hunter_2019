@@ -19,19 +19,16 @@ char my_compt(char *str)
 
 char *my_revstr(char *str)
 {
-    int i = 0, j = 0;
-    char tmp;
+    char save = 0;
+    char a = my_compt(str) - 1;
+    char b = 0;
 
-    while (str[j] != '\0') {
-        j++;
-    }
-    j--;
-    while (i < j) {
-        tmp = str[i];
-        str[i] = str[j];
-        str[j] = tmp;
-        i = i + 1;
-        j = j - 1;
+    while (b < a) {
+        save = str[b];
+        str[b] = str[a];
+        str[a] = save;
+        b++;
+        a--;
     }
     return (str);
 }

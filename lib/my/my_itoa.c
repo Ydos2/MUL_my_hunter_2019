@@ -21,4 +21,4 @@ char *my_itoa(int nb)
     str[i + i] = '\0';
     str = my_revstr(str);
     return (str);
-}//rev marche pas
+}
