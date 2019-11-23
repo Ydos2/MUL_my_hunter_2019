@@ -74,7 +74,7 @@ void main_duck(sfRenderWindow* window, sfSprite* sprite,
     if (duck->health == 0 && ui_struct->seconds > 0.15) {
         if (ui_struct->duck_pos_val <= 5)
             move_rect_duck(duck, 80);
-        else if (ui_struct->duck_pos_val >= 6)
+        if (ui_struct->duck_pos_val >= 6)
             move_rect_duck_flip(duck, 505);
     } else if (duck->health == 1)
         duck_die_anim(sprite, duck, ui_struct);
@@ -94,9 +94,9 @@ void real_move(sfSprite* sprite, duck_t *duck, ui_t *ui_struct)
 
     if (duck->health == 0)
         if (ui_struct->duck_pos_val <= 5)
-            move_duck_up(sprite, position_duck, 18, 0);
+            move_ai_up(sprite, duck, ui_struct);
         else
-            move_duck_down(sprite, position_duck, 18, 0);
+            move_ai_down(sprite, duck, ui_struct);
     else
         if (ui_struct->duck_pos_val <= 5)
             move_duck_up(sprite, position_duck, 12, 11);

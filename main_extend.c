@@ -32,3 +32,37 @@ void main_extend_2(ui_t *ui_struct, duck_t *duck)
     Set_Spawn_Pos_1(ui_struct->sprite, ui_struct, duck);
     sfRenderWindow_setFramerateLimit(ui_struct->window, 30);
 }
+
+void move_ai_up(sfSprite* sprite, duck_t *duck, ui_t *ui_struct)
+{
+    sfVector2f position_duck;
+
+    if (ui_struct->duck_pos_val == 0)
+        move_duck_up(sprite, position_duck, 22, 16);
+    if (ui_struct->duck_pos_val == 1)
+        move_duck_up(sprite, position_duck, 22, 8);
+    if (ui_struct->duck_pos_val == 2)
+        move_duck_up(sprite, position_duck, 22, 0);
+    if (ui_struct->duck_pos_val == 3)
+        move_duck_up(sprite, position_duck, 22, 4);
+    if (ui_struct->duck_pos_val == 4)
+        move_duck_up(sprite, position_duck, 22, -8);
+    if (ui_struct->duck_pos_val == 5)
+        move_duck_up(sprite, position_duck, 22, -16);
+}
+
+void move_ai_down(sfSprite* sprite, duck_t *duck, ui_t *ui_struct)
+{
+    sfVector2f position_duck;
+
+    if (ui_struct->duck_pos_val == 6)
+        move_duck_down(sprite, position_duck, 22, 16);
+    if (ui_struct->duck_pos_val == 7)
+        move_duck_down(sprite, position_duck, 22, 10);
+    if (ui_struct->duck_pos_val == 8)
+        move_duck_down(sprite, position_duck, 22, 0);
+    if (ui_struct->duck_pos_val == 9)
+        move_duck_down(sprite, position_duck, 22, -10);
+    if (ui_struct->duck_pos_val == 10)
+        move_duck_down(sprite, position_duck, 22, -16);
+}

@@ -86,6 +86,11 @@ void pos_life(sfVector2f position_duck, sfSprite* sprite,
             ui_struct->player_health -= 1;
         Set_Spawn_Pos_1(sprite, ui_struct, duck);
     }
+    if (position_duck.y <= -100 || position_duck.y >= 800) {
+        if (duck->time_to_Death == 0)
+            ui_struct->player_health -= 1;
+        Set_Spawn_Pos_1(sprite, ui_struct, duck);
+    }
 }
 
 void duck_die_anim(sfSprite* sprite,

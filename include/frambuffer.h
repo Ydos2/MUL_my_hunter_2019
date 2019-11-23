@@ -56,6 +56,7 @@ typedef struct ui {
     float seconds;
     int flash;
     int scrore_mult;
+    int sound_die;
     sfSprite* sprite;
     sfTexture* texture;
     sfTime time;
@@ -64,6 +65,10 @@ typedef struct ui {
     sfRenderWindow* window;
 } ui_t;
 
+void move_ai_up(sfSprite* sprite, duck_t *duck, ui_t *ui_struct);
+void move_ai_down(sfSprite* sprite, duck_t *duck, ui_t *ui_struct);
+void sound_start(void);
+void sound_die(void);
 void main_extend_2(ui_t *ui_struct, duck_t *duck);
 void main_extend_1(sfRenderWindow *window, ui_t *ui_struct);
 void duck_die_anim(sfSprite* sprite,
@@ -110,10 +115,10 @@ void draw_background_down(sfRenderWindow* window);
 void display_ui_score_1(sfRenderWindow *window);
 void display_ui_score_2(sfRenderWindow *window, ui_t *ui_struct);
 void destroy_obj1(ui_t *ui);
-void sound_fire();
-void sound_empty();
-void sound_reload();
-void music_game();
+void sound_fire(void);
+void sound_empty(void);
+void sound_reload(void);
+void music_game(ui_t *ui_struct);
 void move_rect_duck(duck_t *duck, int max_value);
 void move_rect_duck_die(duck_t *duck, int max_value);
 void duck_pos(sfSprite* sprite, sfVector2f position_duck, duck_t *duck);

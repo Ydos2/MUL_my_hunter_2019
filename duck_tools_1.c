@@ -30,6 +30,7 @@ void val_start(duck_t *duck, ui_t *ui_struct)
     ui_struct->player_health = 3;
     ui_struct->flash = 255;
     duck->is_death = 0;
+    ui_struct->sound_die = 0;
 }
 
 void clock_func(ui_t *ui_struct)

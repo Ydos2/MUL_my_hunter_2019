@@ -18,7 +18,7 @@ char *my_itoa(int nb)
         i++;
     }
     str[i] = nb % 10 + 48;
-    str[i + i] = '\0';
+    str[i + 1] = '\0';
     str = my_revstr(str);
     return (str);
 }

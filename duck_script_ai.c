@@ -13,6 +13,7 @@ void Set_Spawn_Pos_1(sfSprite* sprite, ui_t *ui_struct, duck_t *duck)
     sfVector2f duck_pos;
     int x = (rand() % 10);
 
+    duck->health = 0, duck->time_to_Death = 0;
     ui_struct->duck_pos_val = x;
     switch (x) {
     case 0:

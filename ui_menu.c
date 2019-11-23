@@ -10,6 +10,10 @@
 
 void game_over(sfRenderWindow *window, ui_t *ui_struct)
 {
+    if (ui_struct->sound_die == 0) {
+        sound_die();
+        ui_struct->sound_die = 1;
+    }
     display_ui_gameover(window);
 }
 
