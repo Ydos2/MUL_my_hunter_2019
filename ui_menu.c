@@ -17,7 +17,7 @@ void game_over(sfRenderWindow *window, ui_t *ui_struct)
     display_ui_gameover(window);
 }
 
-void menu(sfRenderWindow *window, ui_t *ui_struct)
+void create_menu(sfRenderWindow *window, ui_t *ui_struct)
 {
     display_ui_menu(window);
 }

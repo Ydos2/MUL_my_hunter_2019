@@ -73,7 +73,7 @@ void main_extend_2(ui_t *ui_struct, duck_t *duck);
 void main_extend_1(sfRenderWindow *window, ui_t *ui_struct);
 void duck_die_anim(sfSprite* sprite,
             duck_t *duck, ui_t *ui_struct);
-void pos_life(sfVector2f position_duck, sfSprite* sprite,
+void position_life(sfVector2f position_duck, sfSprite* sprite,
             duck_t *duck, ui_t *ui_struct);
 void analyse_events(sfRenderWindow *window, sfEvent event,
                     duck_t *duck, ui_t *ui_struct);
@@ -82,14 +82,14 @@ void manage_mouse_click_gameover(sfMouseButtonEvent event,
                                 duck_t *duck, ui_t *ui_struct);
 void real_move(sfSprite* sprite, duck_t *duck, ui_t *ui_struct);
 void display_ui_gameover(sfRenderWindow *window);
-void menu(sfRenderWindow *window, ui_t *ui_struct);
+void create_menu(sfRenderWindow *window, ui_t *ui_struct);
 void game_over(sfRenderWindow *window, ui_t *ui_struct);
 void move_rect_duck_flip(duck_t *duck, int max_value);
 void draw_health(sfRenderWindow* window, ui_t *ui_struct);
 void draw_health_2(sfRenderWindow* window, ui_t *ui_struct,
                 sfSprite* sprite_health, sfVector2f position_health);
 void extend_window_open(sfRenderWindow *window, ui_t *ui_struct, sfEvent event);
-int help(int ac, char **av);
+int draw_help(int ac, char **av);
 void display_ui_mult_score_1(sfRenderWindow *window);
 void display_ui_mult_score_2(sfRenderWindow *window, ui_t *ui_struct);
 void create_flash(sfRenderWindow* window, ui_t *ui_struct);
@@ -104,11 +104,11 @@ void draw_bullet(sfRenderWindow* window, ui_t *ui_struct);
 void draw_bullet_2(sfRenderWindow* window, ui_t *ui_struct,
                 sfSprite* sprite_bullet, sfVector2f position_bullet);
 void create_aim(sfRenderWindow* window, sfMouseMoveEvent event);
-void clock_func(ui_t *ui_struct);
-void val_start(duck_t *duck, ui_t *ui_struct);
+void create_clock_func(ui_t *ui_struct);
+void set_val_start(duck_t *duck, ui_t *ui_struct);
 sfTexture* create_texture_1(sfTexture *texture);
 sfSprite* create_sprite_1(sfSprite *sprite, sfTexture* texture);
-void main_duck(sfRenderWindow* window, sfSprite* sprite,
+void define_duck(sfRenderWindow* window, sfSprite* sprite,
             duck_t *duck, ui_t *ui_struct);
 void draw_background_up(sfRenderWindow* window);
 void draw_background_down(sfRenderWindow* window);
@@ -121,7 +121,7 @@ void sound_reload(void);
 void music_game(ui_t *ui_struct);
 void move_rect_duck(duck_t *duck, int max_value);
 void move_rect_duck_die(duck_t *duck, int max_value);
-void duck_pos(sfSprite* sprite, sfVector2f position_duck, duck_t *duck);
+void set_duck_pos(sfSprite* sprite, sfVector2f position_duck, duck_t *duck);
 void draw_druck(sfRenderWindow* window, sfSprite* sprite,
                 sfIntRect rect, duck_t *duck);
 void move_duck_up(sfSprite* sprite, sfVector2f position_duck,

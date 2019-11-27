@@ -14,7 +14,7 @@ int main(int ac, char **av)
     duck_t *duck = NULL;
     ui_t *ui_struct = NULL;
 
-    for (int help_int = help(ac, av); help_int == 1;)
+    for (int help_int = draw_help(ac, av); help_int == 1;)
         return (0);
     duck = malloc(sizeof(duck_t));
     ui_struct = malloc(sizeof(ui_t));
@@ -24,7 +24,7 @@ int main(int ac, char **av)
             analyse_events(ui_struct->window, event, duck, ui_struct);
         main_extend_1(ui_struct->window, ui_struct);
         if (ui_struct->menu == 0) {
-            main_duck(ui_struct->window, ui_struct->sprite, duck, ui_struct);
+            define_duck(ui_struct->window, ui_struct->sprite, duck, ui_struct);
         } else
             display_ui_menu(ui_struct->window);
         extend_window_open(ui_struct->window, ui_struct, event);
@@ -47,7 +47,7 @@ void extend_window_open(sfRenderWindow *window, ui_t *ui_struct, sfEvent event)
     sfRenderWindow_display(window);
 }
 
-int help(int ac, char **av)
+int draw_help(int ac, char **av)
 {
     if (ac == 2 && av[1][0] == '-' && av[1][1] == 'h') {
         my_putstr("USAGE :\n");
@@ -64,7 +64,7 @@ int help(int ac, char **av)
     }
 }
 
-void main_duck(sfRenderWindow* window, sfSprite* sprite,
+void define_duck(sfRenderWindow* window, sfSprite* sprite,
             duck_t *duck, ui_t *ui_struct)
 {
     sfIntRect rect;
@@ -82,10 +82,10 @@ void main_duck(sfRenderWindow* window, sfSprite* sprite,
         game_over(window, ui_struct);
     else {
         draw_druck(window, sprite, rect, duck);
-        duck_pos(sprite, position_duck, duck);
+        set_duck_pos(sprite, position_duck, duck);
         real_move(sprite, duck, ui_struct);
     }
-    pos_life(position_duck, sprite, duck, ui_struct);
+    position_life(position_duck, sprite, duck, ui_struct);
 }
 
 void real_move(sfSprite* sprite, duck_t *duck, ui_t *ui_struct)

@@ -46,6 +46,7 @@ COMPIL_TEST		= gcc $(SRC) -g3 -L $(DIRLIB) $(DIRTEST) --coverage -lcriterion -lm
 EXEC		= my_hunter
 EXEC_TEST		= tests_my_hunter
 RUN_TESTS	=	./$(EXEC_TEST)
+RUN_VALGRIND	=	valgrind --leak-resolution=high --num-callers=40 --track-origins=yes ./$(EXEC)
 
 COVERAGE	=	gcovr --exclude tests/
 COVERAGE_BRANCH		=	gcovr --exclude tests/ -b
@@ -69,6 +70,9 @@ run_test:
 		$(COVERAGE)
 		$(COVERAGE_BRANCH)
 
+run_valgrind:
+		$(RUN_VALGRIND)
+
 clean:
 		rm -f $(SRC_O)
 
@@ -82,4 +86,6 @@ re: fclean all
 
 tests_run: make compilation compilation_test run_test clean test_clean
 
-debug: make compilation compilation_debug clean clean
+debug: make compilation compilation_debug clean
+
+valgrind: make compilation compilation_debug run_valgrind clean

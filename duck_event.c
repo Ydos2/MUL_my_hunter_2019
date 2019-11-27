@@ -45,7 +45,7 @@ void manage_mouse_click_gameover(sfMouseButtonEvent event,
     ui_struct->menu = 0;
     ui_struct->sound_die = 0;
     sound_start();
-    val_start(duck, ui_struct);
+    set_val_start(duck, ui_struct);
 }
 
 void manage_mouse_click_left(sfMouseButtonEvent event, duck_t *duck,

@@ -8,7 +8,7 @@
 #include "include/frambuffer.h"
 #include "include/my.h"
 
-void duck_pos(sfSprite* sprite, sfVector2f position_duck, duck_t *duck)
+void set_duck_pos(sfSprite* sprite, sfVector2f position_duck, duck_t *duck)
 {
     position_duck = sfSprite_getPosition(sprite);
     duck->pos_x_max = position_duck.x+140;

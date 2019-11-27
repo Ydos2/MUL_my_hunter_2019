@@ -22,7 +22,7 @@ sfSprite* create_sprite_1(sfSprite *sprite, sfTexture* texture)
     return (sprite);
 }
 
-void val_start(duck_t *duck, ui_t *ui_struct)
+void set_val_start(duck_t *duck, ui_t *ui_struct)
 {
     duck->health = 0, duck->offset = 0;
     ui_struct->score = 0, ui_struct->ammo = 3, ui_struct->scrore_mult = 0;
@@ -33,7 +33,7 @@ void val_start(duck_t *duck, ui_t *ui_struct)
     ui_struct->sound_die = 0;
 }
 
-void clock_func(ui_t *ui_struct)
+void create_clock_func(ui_t *ui_struct)
 {
     ui_struct->time = sfClock_getElapsedTime(ui_struct->clock);
     ui_struct->seconds = ui_struct->time.microseconds / 1000000.0;

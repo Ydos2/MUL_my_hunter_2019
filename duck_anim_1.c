@@ -72,7 +72,7 @@ void move_rect_duck_flip(duck_t *duck, int max_value)
         duck->offset = 425;
 }
 
-void pos_life(sfVector2f position_duck, sfSprite* sprite,
+void position_life(sfVector2f position_duck, sfSprite* sprite,
             duck_t *duck, ui_t *ui_struct)
 {
     position_duck = sfSprite_getPosition(sprite);
