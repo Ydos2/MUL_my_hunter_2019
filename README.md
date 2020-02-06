@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.com/Ydos2/PSU_minishell1_2019.svg?branch=master)](https://api.travis-ci.com/Ydos2/PSU_minishell1_2019)
+[![Build Status](https://api.travis-ci.com/Ydos2/MUL_my_hunter_2019.svg?branch=master)](https://api.travis-ci.com/Ydos2/MUL_my_hunter_2019)
 
  # MUL_my_hunter_2019
 This is a game created in csfm around the game Duck Hunt. 
