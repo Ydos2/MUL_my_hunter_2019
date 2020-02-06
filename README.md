@@ -9,5 +9,5 @@ Author : Mathias Ressort
 * CSFML
 
 ## Screenshot
-![screenshot](https://github.com/Ydos2/MUL_my_hunter_2019/Pictures/Screenshot_1.png)
-![screenshot](https://github.com/Ydos2/MUL_my_hunter_2019/Pictures/Screenshot_2.png) 
+![screenshot](https://github.com/Ydos2/MUL_my_hunter_2019/blob/master/Pictures/Screenshot_1.png)
+![screenshot](https://github.com/Ydos2/MUL_my_hunter_2019/blob/master/Pictures/Screenshot_2.png)
